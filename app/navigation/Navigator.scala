@@ -27,8 +27,20 @@ import models._
 class Navigator @Inject()() {
 
   private val normalRoutes: Page => UserAnswers => Call = {
-    case _ => _ => routes.IndexController.onPageLoad()
+    case MovementReferenceNumberPage => _ => routes.GoodsLocationController.onPageLoad(NormalMode)
+    case GoodsLocationPage           => goodsLocationRoute
+    case CustomsSubPlacePage         => _ => routes.TraderNameController.onPageLoad(NormalMode)
+    case AuthorisedLocationPage      => _ => routes.TraderNameController.onPageLoad(NormalMode)
+    case TraderNamePage              => _ => routes.CheckYourAnswersController.onPageLoad()
+    case _                           => _ => routes.IndexController.onPageLoad()
   }
+
+  private def goodsLocationRoute(answers: UserAnswers): Call =
+    answers.get(GoodsLocationPage) match {
+      case Some(GoodsLocation.Borderforce)         => routes.CustomsSubPlaceController.onPageLoad(NormalMode)
+      case Some(GoodsLocation.Authorisedconsignee) => routes.AuthorisedLocationController.onPageLoad(NormalMode)
+      case None                                    => routes.SessionExpiredController.onPageLoad()
+    }
 
   private val checkRouteMap: Page => UserAnswers => Call = {
     case _ => _ => routes.CheckYourAnswersController.onPageLoad()

@@ -43,6 +43,16 @@ class NavigatorSpec extends SpecBase with ScalaCheckPropertyChecks with Generato
               .mustBe(routes.IndexController.onPageLoad())
         }
       }
+
+      "must go from Movement Reference Number to Goods Location" in {
+
+        forAll(arbitrary[UserAnswers]) {
+          answers =>
+
+            navigator.nextPage(MovementReferenceNumberPage, NormalMode, answers)
+              .mustBe(routes.GoodsLocationController.onPageLoad(NormalMode))
+        }
+      }
     }
 
     "in Check mode" - {
