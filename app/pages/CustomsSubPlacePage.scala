@@ -14,16 +14,13 @@
  * limitations under the License.
  */
 
-package generators
+package pages
 
-import models._
-import org.scalacheck.Arbitrary.arbitrary
-import org.scalacheck.{Arbitrary, Gen}
+import play.api.libs.json.JsPath
 
-trait ModelGenerators {
+case object CustomsSubPlacePage extends QuestionPage[String] {
 
-  implicit lazy val arbitraryGoodsLocation: Arbitrary[GoodsLocation] =
-    Arbitrary {
-      Gen.oneOf(GoodsLocation.values.toSeq)
-    }
+  override def path: JsPath = JsPath \ toString
+
+  override def toString: String = "customsSubPlace"
 }

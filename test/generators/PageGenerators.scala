@@ -20,4 +20,19 @@ import org.scalacheck.Arbitrary
 import pages._
 
 trait PageGenerators {
+
+  implicit lazy val arbitraryTraderNamePage: Arbitrary[TraderNamePage.type] =
+    Arbitrary(TraderNamePage)
+
+  implicit lazy val arbitraryMovementReferenceNumberPage: Arbitrary[MovementReferenceNumberPage.type] =
+    Arbitrary(MovementReferenceNumberPage)
+
+  implicit lazy val arbitraryGoodsLocationPage: Arbitrary[GoodsLocationPage.type] =
+    Arbitrary(GoodsLocationPage)
+
+  implicit lazy val arbitraryCustomsSubPlacePage: Arbitrary[CustomsSubPlacePage.type] =
+    Arbitrary(CustomsSubPlacePage)
+
+  implicit lazy val arbitraryAuthorisedLocationPage: Arbitrary[AuthorisedLocationPage.type] =
+    Arbitrary(AuthorisedLocationPage)
 }

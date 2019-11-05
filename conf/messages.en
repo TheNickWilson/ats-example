@@ -129,3 +129,34 @@ compliant.nine.p2.1=The service was built using parts that were tested by the
 compliant.nine.p2.2=Digital Accessibility Centre
 compliant.nine.p2.3=The full service was tested by HMRC and included disabled users.
 compliant.nine.p3=This page was prepared on [date when it was first published]. It was last updated on [date when it was last updated].
+
+authorisedLocation.title = authorisedLocation
+authorisedLocation.heading = authorisedLocation
+authorisedLocation.checkYourAnswersLabel = authorisedLocation
+authorisedLocation.error.required = Enter authorisedLocation
+authorisedLocation.error.length = AuthorisedLocation must be 50 characters or less
+
+customsSubPlace.title = customsSubPlace
+customsSubPlace.heading = customsSubPlace
+customsSubPlace.checkYourAnswersLabel = customsSubPlace
+customsSubPlace.error.required = Enter customsSubPlace
+customsSubPlace.error.length = CustomsSubPlace must be 100 characters or less
+
+goodsLocation.title = Where are the goods located?
+goodsLocation.heading = Where are the goods located?
+goodsLocation.borderForce = Border Force office
+goodsLocation.authorisedConsignee = Authorised Consignee location
+goodsLocation.checkYourAnswersLabel = Where are the goods located?
+goodsLocation.error.required = Select goodsLocation
+
+movementReferenceNumber.title = movementReferenceNumber
+movementReferenceNumber.heading = movementReferenceNumber
+movementReferenceNumber.checkYourAnswersLabel = movementReferenceNumber
+movementReferenceNumber.error.required = Enter movementReferenceNumber
+movementReferenceNumber.error.length = MovementReferenceNumber must be 21 characters or less
+
+traderName.title = traderName
+traderName.heading = traderName
+traderName.checkYourAnswersLabel = traderName
+traderName.error.required = Enter traderName
+traderName.error.length = TraderName must be 100 characters or less

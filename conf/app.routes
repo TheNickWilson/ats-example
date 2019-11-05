@@ -13,3 +13,28 @@ GET        /check-your-answers                          controllers.CheckYourAns
 GET        /unauthorised                                controllers.UnauthorisedController.onPageLoad
 
 GET        /accessibility-statement                     controllers.AccessibilityController.onPageLoad
+
+GET        /authorisedLocation                        controllers.AuthorisedLocationController.onPageLoad(mode: Mode = NormalMode)
+POST       /authorisedLocation                        controllers.AuthorisedLocationController.onSubmit(mode: Mode = NormalMode)
+GET        /changeAuthorisedLocation                  controllers.AuthorisedLocationController.onPageLoad(mode: Mode = CheckMode)
+POST       /changeAuthorisedLocation                  controllers.AuthorisedLocationController.onSubmit(mode: Mode = CheckMode)
+
+GET        /customsSubPlace                        controllers.CustomsSubPlaceController.onPageLoad(mode: Mode = NormalMode)
+POST       /customsSubPlace                        controllers.CustomsSubPlaceController.onSubmit(mode: Mode = NormalMode)
+GET        /changeCustomsSubPlace                  controllers.CustomsSubPlaceController.onPageLoad(mode: Mode = CheckMode)
+POST       /changeCustomsSubPlace                  controllers.CustomsSubPlaceController.onSubmit(mode: Mode = CheckMode)
+
+GET        /goodsLocation                        controllers.GoodsLocationController.onPageLoad(mode: Mode = NormalMode)
+POST       /goodsLocation                        controllers.GoodsLocationController.onSubmit(mode: Mode = NormalMode)
+GET        /changeGoodsLocation                  controllers.GoodsLocationController.onPageLoad(mode: Mode = CheckMode)
+POST       /changeGoodsLocation                  controllers.GoodsLocationController.onSubmit(mode: Mode = CheckMode)
+
+GET        /movementReferenceNumber                        controllers.MovementReferenceNumberController.onPageLoad(mode: Mode = NormalMode)
+POST       /movementReferenceNumber                        controllers.MovementReferenceNumberController.onSubmit(mode: Mode = NormalMode)
+GET        /changeMovementReferenceNumber                  controllers.MovementReferenceNumberController.onPageLoad(mode: Mode = CheckMode)
+POST       /changeMovementReferenceNumber                  controllers.MovementReferenceNumberController.onSubmit(mode: Mode = CheckMode)
+
+GET        /traderName                        controllers.TraderNameController.onPageLoad(mode: Mode = NormalMode)
+POST       /traderName                        controllers.TraderNameController.onSubmit(mode: Mode = NormalMode)
+GET        /changeTraderName                  controllers.TraderNameController.onPageLoad(mode: Mode = CheckMode)
+POST       /changeTraderName                  controllers.TraderNameController.onSubmit(mode: Mode = CheckMode)

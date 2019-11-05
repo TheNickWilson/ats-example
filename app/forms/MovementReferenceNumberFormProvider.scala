@@ -14,16 +14,18 @@
  * limitations under the License.
  */
 
-package generators
+package forms
 
-import models._
-import org.scalacheck.Arbitrary.arbitrary
-import org.scalacheck.{Arbitrary, Gen}
+import javax.inject.Inject
 
-trait ModelGenerators {
+import forms.mappings.Mappings
+import play.api.data.Form
 
-  implicit lazy val arbitraryGoodsLocation: Arbitrary[GoodsLocation] =
-    Arbitrary {
-      Gen.oneOf(GoodsLocation.values.toSeq)
-    }
+class MovementReferenceNumberFormProvider @Inject() extends Mappings {
+
+  def apply(): Form[String] =
+    Form(
+      "value" -> text("movementReferenceNumber.error.required")
+        .verifying(maxLength(21, "movementReferenceNumber.error.length"))
+    )
 }

@@ -14,16 +14,19 @@
  * limitations under the License.
  */
 
-package generators
+package pages
 
-import models._
-import org.scalacheck.Arbitrary.arbitrary
-import org.scalacheck.{Arbitrary, Gen}
+import models.GoodsLocation
+import pages.behaviours.PageBehaviours
 
-trait ModelGenerators {
+class GoodsLocationSpec extends PageBehaviours {
 
-  implicit lazy val arbitraryGoodsLocation: Arbitrary[GoodsLocation] =
-    Arbitrary {
-      Gen.oneOf(GoodsLocation.values.toSeq)
-    }
+  "GoodsLocationPage" - {
+
+    beRetrievable[GoodsLocation](GoodsLocationPage)
+
+    beSettable[GoodsLocation](GoodsLocationPage)
+
+    beRemovable[GoodsLocation](GoodsLocationPage)
+  }
 }
