@@ -19,7 +19,7 @@ package controllers
 import controllers.actions._
 import forms.MovementReferenceNumberFormProvider
 import javax.inject.Inject
-import models.Mode
+import models.{Mode, UserAnswers}
 import navigation.Navigator
 import pages.MovementReferenceNumberPage
 import play.api.i18n.{I18nSupport, MessagesApi}
@@ -38,7 +38,6 @@ class MovementReferenceNumberController @Inject()(
     navigator: Navigator,
     identify: IdentifierAction,
     getData: DataRetrievalAction,
-    requireData: DataRequiredAction,
     formProvider: MovementReferenceNumberFormProvider,
     val controllerComponents: MessagesControllerComponents,
     renderer: Renderer
@@ -46,10 +45,10 @@ class MovementReferenceNumberController @Inject()(
 
   private val form = formProvider()
 
-  def onPageLoad(mode: Mode): Action[AnyContent] = (identify andThen getData andThen requireData).async {
+  def onPageLoad(mode: Mode): Action[AnyContent] = (identify andThen getData).async {
     implicit request =>
 
-      val preparedForm = request.userAnswers.get(MovementReferenceNumberPage) match {
+      val preparedForm = request.userAnswers.getOrElse(UserAnswers(request.internalId)).get(MovementReferenceNumberPage) match {
         case None => form
         case Some(value) => form.fill(value)
       }
@@ -62,7 +61,7 @@ class MovementReferenceNumberController @Inject()(
       renderer.render("movementReferenceNumber.njk", json).map(Ok(_))
   }
 
-  def onSubmit(mode: Mode): Action[AnyContent] = (identify andThen getData andThen requireData).async {
+  def onSubmit(mode: Mode): Action[AnyContent] = (identify andThen getData).async {
     implicit request =>
 
       form.bindFromRequest().fold(
@@ -77,7 +76,7 @@ class MovementReferenceNumberController @Inject()(
         },
         value =>
           for {
-            updatedAnswers <- Future.fromTry(request.userAnswers.set(MovementReferenceNumberPage, value))
+            updatedAnswers <- Future.fromTry(request.userAnswers.getOrElse(UserAnswers(request.internalId)).set(MovementReferenceNumberPage, value))
             _              <- sessionRepository.set(updatedAnswers)
           } yield Redirect(navigator.nextPage(MovementReferenceNumberPage, mode, updatedAnswers))
       )

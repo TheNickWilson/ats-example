@@ -27,7 +27,7 @@ import org.mockito.Mockito.{times, verify, when}
 import org.scalatestplus.mockito.MockitoSugar
 import pages.MovementReferenceNumberPage
 import play.api.inject.bind
-import play.api.libs.json.{JsObject, JsString, Json}
+import play.api.libs.json.{JsObject, Json}
 import play.api.mvc.Call
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
@@ -159,7 +159,10 @@ class MovementReferenceNumberControllerSpec extends SpecBase with MockitoSugar w
       application.stop()
     }
 
-    "must redirect to Session Expired for a GET if no existing data is found" in {
+    "must return OK for a GET if no existing data is found" in {
+
+      when(mockRenderer.render(any(), any())(any()))
+        .thenReturn(Future.successful(Html("")))
 
       val application = applicationBuilder(userAnswers = None).build()
 
@@ -167,16 +170,24 @@ class MovementReferenceNumberControllerSpec extends SpecBase with MockitoSugar w
 
       val result = route(application, request).value
 
-      status(result) mustEqual SEE_OTHER
-
-      redirectLocation(result).value mustEqual routes.SessionExpiredController.onPageLoad().url
+      status(result) mustEqual OK
 
       application.stop()
     }
 
-    "must redirect to Session Expired for a POST if no existing data is found" in {
+    "must redirect to the next page for a POST if no existing data is found" in {
 
-      val application = applicationBuilder(userAnswers = None).build()
+      val mockSessionRepository = mock[SessionRepository]
+
+      when(mockSessionRepository.set(any())) thenReturn Future.successful(true)
+
+      val application =
+        applicationBuilder(userAnswers = Some(emptyUserAnswers))
+          .overrides(
+            bind[Navigator].toInstance(new FakeNavigator(onwardRoute)),
+            bind[SessionRepository].toInstance(mockSessionRepository)
+          )
+          .build()
 
       val request =
         FakeRequest(POST, movementReferenceNumberRoute)
@@ -186,7 +197,7 @@ class MovementReferenceNumberControllerSpec extends SpecBase with MockitoSugar w
 
       status(result) mustEqual SEE_OTHER
 
-      redirectLocation(result).value mustEqual routes.SessionExpiredController.onPageLoad().url
+      redirectLocation(result).value mustEqual onwardRoute.url
 
       application.stop()
     }
