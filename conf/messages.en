@@ -149,11 +149,11 @@ goodsLocation.authorisedConsignee = Authorised Consignee location
 goodsLocation.checkYourAnswersLabel = Where are the goods located?
 goodsLocation.error.required = Select goodsLocation
 
-movementReferenceNumber.title = movementReferenceNumber
-movementReferenceNumber.heading = movementReferenceNumber
-movementReferenceNumber.checkYourAnswersLabel = movementReferenceNumber
-movementReferenceNumber.error.required = Enter movementReferenceNumber
-movementReferenceNumber.error.length = MovementReferenceNumber must be 21 characters or less
+movementReferenceNumber.title = What is the Movement Reference Number?
+movementReferenceNumber.heading = What is the Movement Reference Number?
+movementReferenceNumber.checkYourAnswersLabel = What is the Movement Reference Number?
+movementReferenceNumber.error.required = Enter the Movement Reference Number
+movementReferenceNumber.error.length = Movement Reference Number must be 21 characters or less
 
 traderName.title = traderName
 traderName.heading = traderName
