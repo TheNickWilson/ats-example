@@ -42,7 +42,13 @@ class CheckYourAnswersController @Inject()(
 
       val helper = new CheckYourAnswersHelper(request.userAnswers)
 
-      val answers: Seq[SummaryList.Row] = Seq()
+      val answers: Seq[SummaryList.Row] = Seq(
+        helper.movementReferenceNumber,
+        helper.goodsLocation,
+        helper.customsSubPlace,
+        helper.authorisedLocation,
+        helper.traderName
+      ).flatten
 
       renderer.render(
         "check-your-answers.njk",
